@@ -25,6 +25,12 @@ class TranscribeVideoJob < ApplicationJob
           partial: "video_transcriptions/content",
           locals: { video_transcription: video_transcription }
         )
+
+        question = "Me topé con este video en las redes sociales. Desde tu punto de vista experto, tiene sustento lo que dice el influencer? Debería seguir su consejo?"
+
+        ["marco", "veronica", "camila"].each do |agent|
+          AskAgentJob.perform_later(video_transcription.id, agent, question)
+        end
       end
     end
   end

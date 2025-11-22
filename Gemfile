@@ -21,6 +21,10 @@ gem "ruby_llm", "~> 1.9"
 
 gem "vite_rails"
 
+gem "annotate"
+
+gem "mission_control-jobs"
+
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
 

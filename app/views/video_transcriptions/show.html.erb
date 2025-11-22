@@ -9,6 +9,16 @@
 
   <%= render "content", video_transcription: @video_transcription %>
 
+  <div class="mt-6 bg-white shadow rounded-lg p-6">
+    <h2 class="text-lg font-semibold mb-4 text-gray-900">Comentarios</h2>
+    <div class="border-t border-gray-200 pt-4">
+      <%= render 'comments/comments', video_transcription: @video_transcription %>
+    </div>
+    <div class="mt-4 pt-4 border-t border-gray-200">
+      <%= render 'comments/form', video_transcription: @video_transcription, comment: @video_transcription.comments.build(agent: 'Usuario') %>
+    </div>
+  </div>
+
   <div class="mt-6 flex gap-4">
     <%= link_to "Volver", video_transcriptions_path, class: "text-blue-600 hover:text-blue-800 underline" %>
     <%= button_to "Eliminar", @video_transcription, method: :delete,

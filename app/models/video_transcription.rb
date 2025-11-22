@@ -1,8 +1,20 @@
+# == Schema Information
+#
+# Table name: video_transcriptions
+#
+#  created_at    :datetime         not null
+#  id            :integer          not null, primary key
+#  transcription :string
+#  updated_at    :datetime         not null
+#  url           :string           not null
+#
+
 class VideoTranscription < ApplicationRecord
   include ActionView::RecordIdentifier
 
   has_one_attached :media
   has_many_attached :captures
+  has_many :comments, dependent: :destroy
 
   after_commit :broadcast_update, on: [:update]
 

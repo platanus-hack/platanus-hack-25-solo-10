@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_22_071032) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_22_185540) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
@@ -44,6 +44,15 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_22_071032) do
     t.integer "model_id"
     t.datetime "updated_at", null: false
     t.index ["model_id"], name: "index_chats_on_model_id"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.string "agent", null: false
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "video_transcription_id", null: false
+    t.index ["video_transcription_id"], name: "index_comments_on_video_transcription_id"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -249,6 +258,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_22_071032) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "chats", "models"
+  add_foreign_key "comments", "video_transcriptions"
   add_foreign_key "messages", "chats"
   add_foreign_key "messages", "models"
   add_foreign_key "messages", "tool_calls"

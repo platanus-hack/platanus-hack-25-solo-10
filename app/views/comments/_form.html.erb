@@ -1,0 +1,26 @@
+<%= form_with(model: [@video_transcription, comment], id: "new_comment") do |form| %>
+  <% if comment.errors.any? %>
+    <div class="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+      <h3 class="text-red-800 font-semibold mb-2">
+        <%= pluralize(comment.errors.count, "error") %> al crear el comentario:
+      </h3>
+      <ul class="list-disc list-inside text-red-700">
+        <% comment.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="flex gap-2">
+    <%= form.hidden_field :agent, value: "Usuario" %>
+    <%= form.text_area :content,
+        rows: 2,
+        placeholder: "Escribe tu comentario...",
+        class: "flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none",
+        autofocus: true %>
+    <%= form.submit "Enviar",
+        class: "px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 font-medium" %>
+  </div>
+<% end %>
+

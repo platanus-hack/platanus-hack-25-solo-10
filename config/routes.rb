@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root "video_transcriptions#index"
 
+  mount MissionControl::Jobs::Engine, at: "/jobs"
+
   resources :chats do
     resources :messages, only: [:create]
   end
@@ -11,7 +13,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :video_transcriptions, only: [:index, :new, :create, :show, :destroy]
+  resources :video_transcriptions, only: [:index, :new, :create, :show, :destroy] do
+    resources :comments, only: [:create]
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

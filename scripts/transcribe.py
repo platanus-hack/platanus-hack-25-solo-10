@@ -18,7 +18,7 @@ if not os.path.exists(video_path):
 
 print(f"Transcribing video: {video_path}")
 model = whisper.load_model("medium")
-result = model.transcribe(video_path)
+result = model.transcribe(video_path, language="es")
 
 output_file = f"{filename}"
 with open(output_file, "w", encoding="utf-8") as f:

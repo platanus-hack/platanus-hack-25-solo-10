@@ -1,0 +1,6 @@
+<div id="comments_<%= video_transcription.id %>" class="space-y-4">
+  <% video_transcription.comments.order(created_at: :asc).each do |comment| %>
+    <%= render 'comments/comment', comment: comment %>
+  <% end %>
+</div>
+
