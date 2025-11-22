@@ -1,5 +1,6 @@
-<div class="bg-white shadow rounded-lg p-6 mb-6">
-  <h2 class="text-lg font-semibold mb-4">Información</h2>
+<div id="<%= dom_id(video_transcription) %>">
+  <div class="bg-white shadow rounded-lg p-6 mb-6">
+    <h2 class="text-lg font-semibold mb-4">Información</h2>
   
   <div class="mb-4">
     <label class="block text-sm font-medium text-gray-700 mb-1">URL</label>
@@ -50,7 +51,7 @@
   </div>
 <% end %>
 
-<% if video_transcription.captures.attached? %>
+  <% if video_transcription.captures.attached? %>
   <div class="bg-white shadow rounded-lg p-6 mb-6">
     <h2 class="text-lg font-semibold mb-4">Capturas (<%= video_transcription.captures.count %>)</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -62,4 +63,5 @@
     </div>
   </div>
 <% end %>
+</div>
 

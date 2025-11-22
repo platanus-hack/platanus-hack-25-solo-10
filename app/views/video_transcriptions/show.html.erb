@@ -7,9 +7,7 @@
 <div class="max-w-4xl mx-auto p-6">
   <h1 class="text-2xl font-bold text-red-500 mb-4">Video Transcription #<%= @video_transcription.id %></h1>
 
-  <div id="<%= dom_id(@video_transcription) %>">
-    <%= render "content", video_transcription: @video_transcription %>
-  </div>
+  <%= render "content", video_transcription: @video_transcription %>
 
   <div class="mt-6 flex gap-4">
     <%= link_to "Volver", video_transcriptions_path, class: "text-blue-600 hover:text-blue-800 underline" %>

@@ -1,6 +1,8 @@
 require 'open3'
 
 class DownloadVideoJob < ApplicationJob
+  include ActionView::RecordIdentifier
+
   def perform(url)
     video = VideoTranscription.find_or_create_by!(url: url)
 
@@ -48,11 +50,11 @@ class DownloadVideoJob < ApplicationJob
 
       video.reload
 
-      video.broadcast_replace_to(
-        "video_transcription_#{video.id}",
+      Turbo::StreamsChannel.broadcast_replace_to(
+        video,
+        target: dom_id(video),
         partial: "video_transcriptions/content",
-        locals: { video_transcription: video },
-        target: "video_transcription_#{video.id}"
+        locals: { video_transcription: video }
       )
 
       TranscribeVideoJob.perform_later(video.id)
