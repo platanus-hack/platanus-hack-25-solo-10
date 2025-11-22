@@ -4,9 +4,9 @@
 
 <% content_for :title, "Chat" %>
 
-<h1>Chat <%= @chat.id %></h1>
+<h1 class="text-2xl font-bold text-red-500">Chat <%= @chat.id %></h1>
 
-<p>Using <strong><%= @chat.model.name %></strong></p>
+<p class="text-gray-500">Using <strong><%= @chat.model.name %></strong></p>
 
 <div id="messages">
   <% @chat.messages.where.not(id: nil).each do |message| %>
