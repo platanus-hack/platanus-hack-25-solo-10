@@ -15,7 +15,7 @@
       <%= render 'comments/comments', video_transcription: @video_transcription %>
     </div>
     <div class="mt-4 pt-4 border-t border-gray-200">
-      <%= render 'comments/form', video_transcription: @video_transcription, comment: @video_transcription.comments.build(agent: 'Usuario') %>
+      <%= render 'comments/form', video_transcription: @video_transcription, comment: @video_transcription.comments.build(agent: 'user') %>
     </div>
   </div>
 

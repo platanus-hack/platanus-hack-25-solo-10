@@ -5,6 +5,6 @@
 <% end %>
 
 <%= turbo_stream.replace "new_comment" do %>
-  <%= render 'comments/form', video_transcription: @video_transcription, comment: @comment.persisted? ? @video_transcription.comments.build(agent: 'Usuario') : @comment %>
+  <%= render 'comments/form', video_transcription: @video_transcription, comment: @comment.persisted? ? @video_transcription.comments.build(agent: 'user') : @comment %>
 <% end %>
 

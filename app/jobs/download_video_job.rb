@@ -1,15 +1,18 @@
 require 'open3'
+require 'shellwords'
 
 class DownloadVideoJob < ApplicationJob
   include ActionView::RecordIdentifier
 
-  def perform(url)
-    video = VideoTranscription.find_or_create_by!(url: url)
+  def perform(video_transcription_id)
+    video = VideoTranscription.find(video_transcription_id)
 
     return if video.media.attached?
-
+    escaped_url = Shellwords.escape(video.url)
+    
     key = SecureRandom.uuid
-    cmd = "yt-dlp -f 'best[ext=webm]/best' --merge-output-format webm --write-thumbnail --convert-thumbnails jpg #{url} -o downloads/#{key}.webm"
+    cmd = "yt-dlp -f 'best[ext=webm]/best' --merge-output-format webm --write-thumbnail --convert-thumbnails jpg #{escaped_url} -o downloads/#{key}.webm"
+
     _, status = Open3.capture2(cmd)
 
     if status.success?

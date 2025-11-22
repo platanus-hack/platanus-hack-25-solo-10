@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_22_185540) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_22_221802) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
@@ -250,6 +250,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_22_185540) do
 
   create_table "video_transcriptions", force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.string "initial_question"
     t.string "transcription"
     t.datetime "updated_at", null: false
     t.string "url", null: false

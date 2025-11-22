@@ -22,35 +22,45 @@ class Comment < ApplicationRecord
   validates :content, presence: true
   validates :agent, presence: true
 
-  after_create_commit :broadcast_append
+  enum :agent, {
+    veronica: 'veronica',
+    marco: 'marco',
+    camila: 'camila',
+    user: 'user'
+  }
 
-  def agent_name
-    case agent
-    when 'Veronica'
-      'Verónica Fuentes'
-    when 'Marco'
-      'Dr. Marcos Salazar'
-    when 'Camila'
-      'Abogada Camila Echeverría'
-    when 'Usuario'
-      'Usuario'
-    else
-      agent
+  after_create_commit :broadcast_append
+  after_create_commit :trigger_agent_responses
+
+  def trigger_agent_responses
+    if agent == 'user'
+      %w[veronica marco camila].each do |agent|
+        AskAgentJob.perform_later(video_transcription.id, agent, content)
+      end
     end
   end
 
   def agent_color
     case agent
-    when 'Veronica'
+    when 'veronica'
       'bg-blue-500'
-    when 'Marco'
+    when 'marco'
       'bg-green-500'
-    when 'Camila'
+    when 'camila'
       'bg-purple-500'
-    when 'Usuario'
+    when 'user'
       'bg-gray-600'
-    else
-      'bg-gray-500'
+    end
+  end
+
+  def agent_name
+    case agent
+    when 'veronica'
+      'Verónica Fuentes'
+    when 'marco'
+      'Dr. Marcos Salazar'
+    when 'camila'
+      'Abogada Camila Echeverría'
     end
   end
 

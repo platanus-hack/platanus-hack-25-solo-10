@@ -1,4 +1,6 @@
 class VideoTranscriptionsController < ApplicationController
+  before_action :set_video_transcription, only: [:show, :destroy]
+
   def index
     @video_transcriptions = VideoTranscription.order(created_at: :desc)
   end
@@ -8,32 +10,31 @@ class VideoTranscriptionsController < ApplicationController
   end
 
   def create
-    @video_transcription = VideoTranscription.find_or_create_by!(url: url_param)
+    @video_transcription = VideoTranscription.new(video_transcription_params)
 
-    DownloadVideoJob.perform_later(@video_transcription.url)
-
-    redirect_to @video_transcription, notice: 'Video transcription está siendo descargado.'
+    if @video_transcription.save
+      DownloadVideoJob.perform_later(@video_transcription.id)
+      redirect_to @video_transcription, notice: 'La transcripción de video está siendo descargada.'
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def show
-    @video_transcription = find_video_transcription
   end
 
   def destroy
-    @video_transcription = find_video_transcription
     @video_transcription.destroy!
-
-    redirect_to video_transcriptions_path, notice: 'Video transcription fue eliminado exitosamente.'
+    redirect_to video_transcriptions_path, notice: 'La transcripción de video fue eliminada exitosamente.'
   end
 
   private
 
-  def find_video_transcription
-    VideoTranscription.find(params[:id])
+  def set_video_transcription
+    @video_transcription = VideoTranscription.find(params[:id])
   end
 
-  def url_param
-    params.require(:video_transcription).permit(:url)[:url]
+  def video_transcription_params
+    params.require(:video_transcription).permit(:url, :initial_question)
   end
 end
-

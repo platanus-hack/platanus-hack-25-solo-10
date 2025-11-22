@@ -2,11 +2,12 @@
 #
 # Table name: video_transcriptions
 #
-#  created_at    :datetime         not null
-#  id            :integer          not null, primary key
-#  transcription :string
-#  updated_at    :datetime         not null
-#  url           :string           not null
+#  created_at       :datetime         not null
+#  id               :integer          not null, primary key
+#  initial_question :string
+#  transcription    :string
+#  updated_at       :datetime         not null
+#  url              :string           not null
 #
 
 class VideoTranscription < ApplicationRecord
@@ -17,6 +18,9 @@ class VideoTranscription < ApplicationRecord
   has_many :comments, dependent: :destroy
 
   after_commit :broadcast_update, on: [:update]
+
+  validates :initial_question, presence: true
+  validates :url, presence: true
 
   private
 
