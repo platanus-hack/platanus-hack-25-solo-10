@@ -43,6 +43,12 @@ Rails.application.configure do
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
+  # Configure logger to output to STDOUT when running jobs
+  if ENV["RAILS_LOG_TO_STDOUT"] == "1"
+    config.logger = ActiveSupport::TaggedLogging.new(ActiveSupport::Logger.new(STDOUT))
+    config.log_level = ENV.fetch("RAILS_LOG_LEVEL", "info").to_sym
+  end
+
   # Raise an error on page load if there are pending migrations.
   config.active_record.migration_error = :page_load
 

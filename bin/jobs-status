@@ -1,0 +1,36 @@
+#!/usr/bin/env ruby
+
+require_relative "../config/environment"
+
+puts "=== Estado de Solid Queue ==="
+puts
+
+# Verificar procesos
+processes = SolidQueue::Process.all
+if processes.any?
+  puts "✅ Procesos activos (#{processes.count}):"
+  processes.each do |process|
+    time_since = Time.now - process.last_heartbeat_at
+    status = time_since < 10 ? "🟢 Activo" : "🟡 Inactivo (#{time_since.round}s)"
+    puts "   #{process.kind.ljust(12)} #{process.name.ljust(40)} #{status}"
+  end
+else
+  puts "❌ No hay procesos activos"
+  puts "   Ejecuta: bin/jobs start"
+end
+
+puts
+
+# Verificar trabajos
+pending = SolidQueue::Job.where(finished_at: nil).count
+finished = SolidQueue::Job.where.not(finished_at: nil).count
+failed = SolidQueue::FailedExecution.count
+
+puts "📊 Trabajos:"
+puts "   Pendientes: #{pending}"
+puts "   Completados: #{finished}"
+puts "   Fallidos: #{failed}"
+
+puts
+puts "Para ver logs en tiempo real: tail -f log/development.log | grep -i solid"
+
