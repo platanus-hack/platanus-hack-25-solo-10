@@ -17,6 +17,8 @@ class DownloadVideoJob < ApplicationJob
 
       video.media.blob.analyze
 
+      video.captures.attach(io: File.open(Rails.root.join("downloads", "#{key}.webm.jpg")), filename: "#{key}.webm.jpg", content_type: "image/jpeg")
+
       duration = video.media.blob.metadata["duration"]
 
       split_duration = duration.to_i / 3
@@ -43,6 +45,15 @@ class DownloadVideoJob < ApplicationJob
           )
         end
       end
+
+      video.reload
+
+      video.broadcast_replace_to(
+        "video_transcription_#{video.id}",
+        partial: "video_transcriptions/content",
+        locals: { video_transcription: video },
+        target: "video_transcription_#{video.id}"
+      )
     end
   end
 end
