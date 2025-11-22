@@ -16,7 +16,7 @@ Object.entries(controllers).forEach(([path, module]) => {
     .replace('_controller.js', '')
     .replace(/\//g, '--')
     .replace(/_/g, '-')
-  
+
   if (module.default) {
     application.register(controllerName, module.default)
   }
