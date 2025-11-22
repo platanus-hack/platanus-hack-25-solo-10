@@ -1,0 +1,35 @@
+<div id="<%= dom_id video_transcription %>" class="border border-gray-200 rounded-lg p-4 mb-4 bg-white shadow-sm">
+  <div class="mb-2">
+    <strong class="text-gray-700">URL:</strong>
+    <span class="text-gray-900 break-all">
+      <%= truncate(video_transcription.url, length: 80) %>
+    </span>
+  </div>
+
+  <% if video_transcription.transcription.present? %>
+    <div class="mb-2">
+      <strong class="text-gray-700">Transcripción:</strong>
+      <span class="text-gray-900">
+        <%= truncate(video_transcription.transcription, length: 100) %>
+      </span>
+    </div>
+  <% end %>
+
+  <div class="flex flex-wrap gap-4 text-sm text-gray-600">
+    <div>
+      <strong>Media:</strong>
+      <%= video_transcription.media.attached? ? "✓" : "✗" %>
+    </div>
+
+    <div>
+      <strong>Capturas:</strong>
+      <%= video_transcription.captures.count %>
+    </div>
+
+    <div>
+      <strong>Creado:</strong>
+      <%= video_transcription.created_at.strftime("%B %d, %Y at %I:%M %p") %>
+    </div>
+  </div>
+</div>
+

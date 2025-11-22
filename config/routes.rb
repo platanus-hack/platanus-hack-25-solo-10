@@ -1,12 +1,17 @@
 Rails.application.routes.draw do
+  root "video_transcriptions#index"
+
   resources :chats do
     resources :messages, only: [:create]
   end
+
   resources :models, only: [:index, :show] do
     collection do
       post :refresh
     end
   end
+
+  resources :video_transcriptions, only: [:index, :show]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
