@@ -7,7 +7,7 @@ class DownloadVideoJob < ApplicationJob
     return if video.media.attached?
 
     key = SecureRandom.uuid
-    cmd = "yt-dlp -f 18 --merge-output-format webm --write-thumbnail --convert-thumbnails jpg #{url} -o downloads/#{key}.webm"
+    cmd = "yt-dlp -f 'best[ext=webm]/best' --merge-output-format webm --write-thumbnail --convert-thumbnails jpg #{url} -o downloads/#{key}.webm"
     _, status = Open3.capture2(cmd)
 
     if status.success?
