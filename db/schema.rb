@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_22_030621) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_22_071032) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
@@ -237,6 +237,13 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_22_030621) do
     t.index ["message_id"], name: "index_tool_calls_on_message_id"
     t.index ["name"], name: "index_tool_calls_on_name"
     t.index ["tool_call_id"], name: "index_tool_calls_on_tool_call_id", unique: true
+  end
+
+  create_table "video_transcriptions", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "transcription"
+    t.datetime "updated_at", null: false
+    t.string "url", null: false
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

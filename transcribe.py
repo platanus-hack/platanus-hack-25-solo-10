@@ -36,6 +36,7 @@ def transcribe_with_whisper(audio_file: str) -> dict:
         audio_file,
         word_timestamps=True
     )
+    
     return result
 
 def save_transcription(result: dict, title: str, output_folder: str = "downloads") -> None:
