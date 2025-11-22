@@ -54,6 +54,8 @@ class DownloadVideoJob < ApplicationJob
         locals: { video_transcription: video },
         target: "video_transcription_#{video.id}"
       )
+
+      TranscribeVideoJob.perform_later(video.id)
     end
   end
 end

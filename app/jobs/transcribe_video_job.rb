@@ -1,13 +1,14 @@
 require 'open3'
 
 class TranscribeVideoJob < ApplicationJob
+  include ActionView::RecordIdentifier
+
   def perform(video_transcription_id)
     video_transcription = VideoTranscription.find(video_transcription_id)
 
     # Obtener la ruta completa (full_path) con nombre de archivo y extensión
     blob = video_transcription.media.blob
     path = ActiveStorage::Blob.service.send(:path_for, blob.key)
-
 
     transcription_path = Rails.root.join("downloads", "#{video_transcription_id}.txt")
     cmd = "python3 scripts/transcribe.py #{path} #{transcription_path}"
@@ -18,11 +19,11 @@ class TranscribeVideoJob < ApplicationJob
         transcription_text = File.read(transcription_path, encoding: "utf-8")
         video_transcription.update!(transcription: transcription_text)
 
-        video_transcription.broadcast_replace_to(
-          "video_transcription_#{video_transcription.id}",
+        Turbo::StreamsChannel.broadcast_replace_to(
+          video_transcription,
+          target: dom_id(video_transcription),
           partial: "video_transcriptions/content",
-          locals: { video_transcription: video_transcription },
-          target: "video_transcription_#{video_transcription.id}"
+          locals: { video_transcription: video_transcription }
         )
       end
     end
