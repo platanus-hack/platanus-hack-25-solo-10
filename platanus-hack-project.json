@@ -1,5 +1,5 @@
 {
   "project-name": "Chekia",
-  "project-description-spanish": "Verifica si es verdadero o falso lo que viste en redes sociales. Funciona con YouTube, Instagram o TikTok.",
+  "project-description-spanish": "Verifica si es verdadero o falso lo que viste en redes sociales. Funciona con YouTube Shorts e Instagram Reels.",
   "deploy-url": "https://checkia.ngrok.app"
 }
