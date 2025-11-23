@@ -1,6 +1,14 @@
 <%= turbo_stream_from @video_transcription %>
 
 <% content_for :title, "Ver Video" %>
+<% content_for :og_type, "website" %>
+<% content_for :og_url, request.original_url %>
+<% content_for :og_title, "Chekia - Verifica la veracidad de videos de redes sociales" %>
+<% content_for :og_description, "Verifica si es verdadero o falso lo que viste en redes sociales. Funciona con YouTube, Instagram o TikTok." %>
+<% content_for :twitter_card, "summary_large_image" %>
+<% content_for :twitter_title, "Chekia - Verifica la veracidad de videos de redes sociales" %>
+<% content_for :twitter_description, "Verifica si es verdadero o falso lo que viste en redes sociales. Funciona con YouTube, Instagram o TikTok." %>
+<% content_for :twitter_image, root_url + "checkia-big.png" %>
 
 <div class="min-h-screen bg-gray-50 pb-6">
   <div class="max-w-2xl mx-auto px-3 sm:px-4 pt-3 sm:pt-4">
@@ -20,7 +28,7 @@
 
     <!-- Comments Section -->
     <div class="p-3 sm:p-4">
-      <div id="comments_<%= @video_transcription.id %>" class="space-y-3 sm:space-y-4 min-h-[200px]">
+      <div id="comments_<%= @video_transcription.id %>" data-controller="auto-scroll" class="space-y-3 sm:space-y-4 min-h-[200px]">
         <% @video_transcription.comments.order(created_at: :asc).each do |comment| %>
           <%= render 'comments/comment', comment: comment %>
         <% end %>
