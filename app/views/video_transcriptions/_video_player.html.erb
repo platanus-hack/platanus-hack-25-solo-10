@@ -1,14 +1,14 @@
 <% if video_transcription.media.attached? %>
   <!-- Video is ready -->
-  <div class="overflow-hidden rounded-lg">
-    <div class="aspect-[9/16] bg-black flex items-center justify-center max-w-sm mx-auto rounded-lg">
+  <div class="overflow-hidden rounded-lg max-w-sm mx-auto">
+    <div class="aspect-[9/16] bg-black flex items-center justify-center rounded-lg overflow-hidden">
       <% if video_transcription.media.content_type.start_with?("video/") %>
         <%= video_tag url_for(video_transcription.media), 
             controls: true, 
-            class: "w-full h-full object-contain",
+            class: "w-full h-full object-contain rounded-lg",
             playsinline: true %>
       <% elsif video_transcription.media.content_type.start_with?("image/") %>
-        <%= image_tag video_transcription.media, class: "w-full h-full object-contain" %>
+        <%= image_tag video_transcription.media, class: "w-full h-full object-contain rounded-lg" %>
       <% end %>
     </div>
     
