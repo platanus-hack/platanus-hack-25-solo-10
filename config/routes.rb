@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "video_transcriptions#index"
+  root "home#index"
 
   mount MissionControl::Jobs::Engine, at: "/jobs"
 
