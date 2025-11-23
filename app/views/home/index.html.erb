@@ -1,10 +1,24 @@
 <% content_for :title, "Chekia" %>
+<% content_for :meta_description, "Verifica si es verdadero o falso lo que viste en redes sociales. Funciona con YouTube, Instagram o TikTok." %>
+<% content_for :og_type, "website" %>
+<% content_for :og_url, root_url %>
+<% content_for :og_title, "Chekia - Verifica la veracidad de videos de redes sociales" %>
+<% content_for :og_description, "Verifica si es verdadero o falso lo que viste en redes sociales. Funciona con YouTube, Instagram o TikTok." %>
+<% content_for :og_image, root_url + "icon.png" %>
+<% content_for :twitter_card, "summary_large_image" %>
+<% content_for :twitter_title, "Chekia - Verifica la veracidad de videos de redes sociales" %>
+<% content_for :twitter_description, "Verifica si es verdadero o falso lo que viste en redes sociales. Funciona con YouTube, Instagram o TikTok." %>
+<% content_for :twitter_image, root_url + "icon.png" %>
 
 <div class="min-h-screen flex flex-col items-center justify-center px-4 py-8 bg-white">
   <!-- Logo -->
-  <h1 class="text-5xl md:text-6xl text-[var(--color-yale-blue)] mb-8 text-center" style="font-family: var(--font-logo);">
+  <h1 class="text-5xl md:text-6xl text-yale-blue mb-4 text-center" style="font-family: var(--font-logo);">
     Chekia
   </h1>
+
+  <p class="text-deep-space-blue text-lg mb-8 text-center">
+    Verifica si es <span class="text-mint-leaf">verdadero</span> o <span class="text-strawberry-red">falso</span> lo que viste en redes sociales
+  </p>
 
   <!-- URL Form -->
   <div class="w-full max-w-md mb-8">
@@ -28,20 +42,20 @@
             autocomplete: "url" %>
       </div>
 
-      <div class="mb-4">
+      <div class="mb-8">
         <%= form.text_field :initial_question,
             class: "w-full px-4 py-3 text-base border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--color-yale-blue)] focus:border-[var(--color-yale-blue)] outline-none",
             placeholder: "¿Qué te gustaría saber sobre este video?",
             required: true %>
       </div>
 
-      <p class="text-sm text-gray-600 mb-4 text-center">
+      <div class="w-full mb-4">
+        <%= form.submit "Comenzar  👉", class: "w-full px-6 py-3 bg-[var(--color-yale-blue)] text-white text-base font-semibold rounded-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-[var(--color-yale-blue)] focus:ring-offset-2 cursor-pointer transition-opacity" %>
+      </div>
+
+      <p class="text-xs text-deep-space-blue mb-4 text-center">
         Funciona con YouTube, Instagram o TikTok
       </p>
-
-      <div class="w-full">
-        <%= form.submit "Verificar Video", class: "w-full px-6 py-3 bg-[var(--color-yale-blue)] text-white text-base font-semibold rounded-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-[var(--color-yale-blue)] focus:ring-offset-2 cursor-pointer transition-opacity" %>
-      </div>
     <% end %>
   </div>
 </div>

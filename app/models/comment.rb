@@ -76,7 +76,7 @@ class Comment < ApplicationRecord
     when 'rosa'
       'Rosa'
     when 'user'
-      'Tú'
+      'Usuario'
     end
   end
 

@@ -6,6 +6,36 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="application-name" content="Jurai">
     <meta name="mobile-web-app-capable" content="yes">
+    
+    <%# Meta description %>
+    <% if content_for?(:meta_description) %>
+      <meta name="description" content="<%= content_for(:meta_description) %>">
+    <% end %>
+    
+    <%# Open Graph / Facebook %>
+    <% if content_for?(:og_title) %>
+      <meta property="og:type" content="<%= content_for(:og_type) || 'website' %>">
+      <meta property="og:url" content="<%= content_for(:og_url) || request.original_url %>">
+      <meta property="og:title" content="<%= content_for(:og_title) %>">
+      <meta property="og:description" content="<%= content_for(:og_description) || content_for(:meta_description) %>">
+      <% if content_for?(:og_image) %>
+        <meta property="og:image" content="<%= content_for(:og_image) %>">
+      <% end %>
+    <% end %>
+    
+    <%# Twitter %>
+    <% if content_for?(:twitter_card) %>
+      <meta name="twitter:card" content="<%= content_for(:twitter_card) || 'summary_large_image' %>">
+      <% if content_for?(:twitter_title) %>
+        <meta name="twitter:title" content="<%= content_for(:twitter_title) %>">
+      <% end %>
+      <% if content_for?(:twitter_description) %>
+        <meta name="twitter:description" content="<%= content_for(:twitter_description) %>">
+      <% end %>
+      <% if content_for?(:twitter_image) %>
+        <meta name="twitter:image" content="<%= content_for(:twitter_image) %>">
+      <% end %>
+    <% end %>
     <link href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <%= csrf_meta_tags %>

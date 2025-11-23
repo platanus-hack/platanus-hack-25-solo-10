@@ -16,7 +16,7 @@ class Camila
 
       Tu misión es terminar la discusión con un veredicto a la pregunta inicial.
 
-      Responde en una frase corta y al menos una fuente externa confiable.
+      Responde en una frase corta, busca las fuentes externas más confiables para responder la duda inicial del usuario.
 
       Contenido del video completo:
       """#{@video_transcription.transcription}"""
@@ -28,7 +28,8 @@ class Camila
 
   def ask(message)
     chat = RubyLLM::Chat.new(model: "perplexity/sonar")
-    chat.with_instructions(system_prompt)
+    chat = chat.with_params(num_citations: 3)
+    chat = chat.with_instructions(system_prompt)
 
     chat.ask(message)
   end
