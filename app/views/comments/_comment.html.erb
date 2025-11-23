@@ -6,10 +6,10 @@
   </div>
   <div class="flex-1 min-w-0">
     <div class="flex items-baseline gap-2 mb-1">
-      <span class="font-semibold text-gray-900 text-sm"><%= comment.agent_name %></span>
-      <span class="text-xs text-gray-500"><%= comment.created_at.strftime("%H:%M") %></span>
+      <span class="font-semibold text-[var(--color-deep-space-blue)] text-sm"><%= comment.agent_name %></span>
+      <span class="text-xs text-[var(--color-deep-space-blue)] opacity-60"><%= comment.created_at.strftime("%H:%M") %></span>
     </div>
-    <div class="bg-white border border-gray-200 rounded-2xl rounded-tl-sm px-4 py-2.5 text-gray-900 whitespace-pre-wrap shadow-sm">
+    <div class="bg-white border border-gray-200 rounded-2xl rounded-tl-sm px-4 py-2.5 text-[var(--color-deep-space-blue)] whitespace-pre-wrap shadow-sm">
       <%= comment.content %>
     </div>
   </div>

@@ -1,9 +1,11 @@
 <%= form_with(model: message, url: [@chat, message], id: "new_message") do |form| %>
   <% if message.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(message.errors.count, "error") %> prohibited this message from being saved:</h2>
+    <div class="bg-red-50 border border-red-200 rounded-lg p-4 mb-4">
+      <h2 class="text-red-800 font-semibold mb-2">
+        <%= pluralize(message.errors.count, "error") %> prohibited this message from being saved:
+      </h2>
 
-      <ul>
+      <ul class="list-disc list-inside text-red-700">
         <% message.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
@@ -11,11 +13,12 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.text_field :content, style: "width: 100%; max-width: 600px;", placeholder: "Message...", autofocus: true %>
-  </div>
-
-  <div>
-    <%= form.submit "Send message" %>
+  <div class="flex gap-2">
+    <%= form.text_field :content,
+        class: "flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-yale-blue)] focus:border-transparent",
+        placeholder: "Message...",
+        autofocus: true %>
+    <%= form.submit "Send message",
+        class: "px-6 py-2 bg-[var(--color-yale-blue)] text-white rounded-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-[var(--color-yale-blue)] focus:ring-offset-2 font-medium" %>
   </div>
 <% end %>

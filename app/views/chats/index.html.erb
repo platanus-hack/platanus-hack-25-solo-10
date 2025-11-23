@@ -2,15 +2,18 @@
 
 <% content_for :title, "Chats" %>
 
-<h1>Chats</h1>
+<div class="max-w-6xl mx-auto p-6 bg-white">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-bold text-[var(--color-deep-space-blue)]">Chats</h1>
+    <%= link_to "New chat", new_chat_path, class: "px-4 py-2 bg-[var(--color-yale-blue)] text-white rounded-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-[var(--color-yale-blue)] focus:ring-offset-2" %>
+  </div>
 
-<div id="chats">
-  <% @chats.each do |chat| %>
-    <%= render chat %>
-    <p>
-      <%= link_to "Show this chat", chat %>
-    </p>
-  <% end %>
+  <div id="chats">
+    <% @chats.each do |chat| %>
+      <%= render chat %>
+      <p class="mt-2">
+        <%= link_to "Show this chat", chat, class: "text-[var(--color-yale-blue)] hover:opacity-80 underline" %>
+      </p>
+    <% end %>
+  </div>
 </div>
-
-<%= link_to "New chat", new_chat_path %>

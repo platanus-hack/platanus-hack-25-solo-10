@@ -1,8 +1,8 @@
-<tr id="<%= dom_id model %>">
-  <td><%= model.provider %></td>
-  <td><%= model.name %></td>
-  <td><%= number_with_delimiter(model.context_window) if model.context_window %></td>
-  <td>
+<tr id="<%= dom_id model %>" class="hover:bg-gray-50">
+  <td class="border border-gray-200 px-4 py-2 text-[var(--color-deep-space-blue)]"><%= model.provider %></td>
+  <td class="border border-gray-200 px-4 py-2 text-[var(--color-deep-space-blue)]"><%= model.name %></td>
+  <td class="border border-gray-200 px-4 py-2 text-[var(--color-deep-space-blue)]"><%= number_with_delimiter(model.context_window) if model.context_window %></td>
+  <td class="border border-gray-200 px-4 py-2 text-[var(--color-deep-space-blue)]">
     <% if model.pricing && model.pricing['text_tokens'] && model.pricing['text_tokens']['standard'] %>
       <% input = model.pricing['text_tokens']['standard']['input_per_million'] %>
       <% output = model.pricing['text_tokens']['standard']['output_per_million'] %>
@@ -11,6 +11,10 @@
       <% end %>
     <% end %>
   </td>
-  <td><%= link_to "Show", model %></td>
-  <td><%= link_to "Start chat", new_chat_path(model: model.model_id) %></td>
+  <td class="border border-gray-200 px-4 py-2">
+    <%= link_to "Show", model, class: "text-[var(--color-yale-blue)] hover:opacity-80 underline" %>
+  </td>
+  <td class="border border-gray-200 px-4 py-2">
+    <%= link_to "Start chat", new_chat_path(model: model.model_id), class: "text-[var(--color-yale-blue)] hover:opacity-80 underline" %>
+  </td>
 </tr>

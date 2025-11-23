@@ -4,9 +4,10 @@
 
 <% content_for :title, "Chat" %>
 
-<h1 class="text-2xl font-bold text-red-500">Chat <%= @chat.id %></h1>
+<div class="max-w-4xl mx-auto p-6 bg-white">
+  <h1 class="text-2xl font-bold text-[var(--color-deep-space-blue)]">Chat <%= @chat.id %></h1>
 
-<p class="text-gray-500">Using <strong><%= @chat.model.name %></strong></p>
+  <p class="text-[var(--color-deep-space-blue)] opacity-80 mt-2">Using <strong><%= @chat.model.name %></strong></p>
 
 <div id="messages">
   <% @chat.messages.where.not(id: nil).each do |message| %>
@@ -14,10 +15,11 @@
   <% end %>
 </div>
 
-<div style="margin-top: 30px;">
-  <%= render "messages/form", chat: @chat, message: @message %>
-</div>
+  <div class="mt-8">
+    <%= render "messages/form", chat: @chat, message: @message %>
+  </div>
 
-<div style="margin-top: 20px;">
-  <%= link_to "Back to chats", chats_path %>
+  <div class="mt-6">
+    <%= link_to "Back to chats", chats_path, class: "text-[var(--color-yale-blue)] hover:opacity-80 underline" %>
+  </div>
 </div>

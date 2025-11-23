@@ -1,18 +1,23 @@
 <% content_for :title, @model.name %>
 
-<h1><%= @model.name %></h1>
+<div class="max-w-4xl mx-auto p-6 bg-white">
+  <h1 class="text-2xl font-bold text-[var(--color-deep-space-blue)] mb-6"><%= @model.name %></h1>
 
-<p><strong>ID:</strong> <%= @model.model_id %></p>
-<p><strong>Provider:</strong> <%= @model.provider %></p>
-<p><strong>Context Window:</strong> <%= number_with_delimiter(@model.context_window) %> tokens</p>
-<p><strong>Max Output:</strong> <%= number_with_delimiter(@model.max_output_tokens) %> tokens</p>
+  <div class="space-y-3 mb-6">
+    <p class="text-[var(--color-deep-space-blue)]"><strong>ID:</strong> <%= @model.model_id %></p>
+    <p class="text-[var(--color-deep-space-blue)]"><strong>Provider:</strong> <%= @model.provider %></p>
+    <p class="text-[var(--color-deep-space-blue)]"><strong>Context Window:</strong> <%= number_with_delimiter(@model.context_window) %> tokens</p>
+    <p class="text-[var(--color-deep-space-blue)]"><strong>Max Output:</strong> <%= number_with_delimiter(@model.max_output_tokens) %> tokens</p>
 
-<% if @model.capabilities.any? %>
-  <p><strong>Capabilities:</strong> <%= @model.capabilities.join(", ") %></p>
-<% end %>
+    <% if @model.capabilities.any? %>
+      <p class="text-[var(--color-deep-space-blue)]"><strong>Capabilities:</strong> <%= @model.capabilities.join(", ") %></p>
+    <% end %>
+  </div>
 
-<p>
-  <%= link_to "Start chat with this model", new_chat_path(model: @model.model_id) %> |
-  <%= link_to "All models", models_path %> |
-  <%= link_to "Back to chats", chats_path %>
-</p>
+  <div class="flex gap-4">
+    <%= link_to "Start chat with this model", new_chat_path(model: @model.model_id),
+        class: "px-4 py-2 bg-[var(--color-yale-blue)] text-white rounded-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-[var(--color-yale-blue)] focus:ring-offset-2" %>
+    <%= link_to "All models", models_path, class: "text-[var(--color-yale-blue)] hover:opacity-80 underline" %>
+    <%= link_to "Back to chats", chats_path, class: "text-[var(--color-yale-blue)] hover:opacity-80 underline" %>
+  </div>
+</div>

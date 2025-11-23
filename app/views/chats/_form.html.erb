@@ -1,9 +1,11 @@
 <%= form_with(model: chat, url: chats_path) do |form| %>
   <% if chat.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(chat.errors.count, "error") %> prohibited this chat from being saved:</h2>
+    <div class="bg-red-50 border border-red-200 rounded-lg p-4 mb-4">
+      <h2 class="text-red-800 font-semibold mb-2">
+        <%= pluralize(chat.errors.count, "error") %> prohibited this chat from being saved:
+      </h2>
 
-      <ul>
+      <ul class="list-disc list-inside text-red-700">
         <% chat.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
@@ -11,19 +13,23 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :model, "Select AI model:", style: "display: block" %>
+  <div class="mb-4">
+    <%= form.label :model, "Select AI model:", class: "block text-sm font-medium text-[var(--color-deep-space-blue)] mb-2" %>
     <%= form.select :model,
         options_for_select(Model.pluck(:name, :model_id).unshift(["Default (#{RubyLLM.config.default_model})", nil]), @selected_model),
         {},
-        style: "width: 100%; max-width: 600px; padding: 5px;" %>
+        class: "w-full max-w-2xl px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--color-yale-blue)] focus:border-[var(--color-yale-blue)]" %>
   </div>
 
-  <div style="margin-top: 15px;">
-    <%= form.text_field :prompt, style: "width: 100%; max-width: 600px;", placeholder: "What would you like to discuss?", autofocus: true %>
+  <div class="mb-4">
+    <%= form.label :prompt, "Prompt:", class: "block text-sm font-medium text-[var(--color-deep-space-blue)] mb-2" %>
+    <%= form.text_field :prompt,
+        class: "w-full max-w-2xl px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--color-yale-blue)] focus:border-[var(--color-yale-blue)]",
+        placeholder: "What would you like to discuss?",
+        autofocus: true %>
   </div>
 
   <div>
-    <%= form.submit "Start new chat" %>
+    <%= form.submit "Start new chat", class: "px-6 py-2 bg-[var(--color-yale-blue)] text-white rounded-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-[var(--color-yale-blue)] focus:ring-offset-2 cursor-pointer" %>
   </div>
 <% end %>

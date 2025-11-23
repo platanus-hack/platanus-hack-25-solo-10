@@ -1,6 +1,6 @@
-<div style="display: flex; flex-direction: column; gap: 3px; align-items: flex-start; font-family: monospace;">
+<div class="flex flex-col gap-1 items-start font-mono mt-2">
   <% message.tool_calls.each do |tool_call| %>
-    <div style="background: #eee; padding: 5px; border-radius: 4px;">
+    <div class="bg-white border border-gray-200 px-3 py-2 rounded text-[var(--color-deep-space-blue)] text-sm">
       <%= tool_call.name %>(<%= tool_call.arguments.map { |k, v| "#{k}: #{v.inspect}" }.join(", ") %>)
     </div>
   <% end %>

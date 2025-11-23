@@ -2,27 +2,31 @@
 
 <% content_for :title, "Models" %>
 
-<h1>Models</h1>
+<div class="max-w-6xl mx-auto p-6 bg-white">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-bold text-[var(--color-deep-space-blue)]">Models</h1>
+    <%= button_to "Refresh Models", refresh_models_path, method: :post,
+        class: "px-4 py-2 bg-[var(--color-yale-blue)] text-white rounded-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-[var(--color-yale-blue)] focus:ring-offset-2" %>
+  </div>
 
-<p>
-  <%= button_to "Refresh Models", refresh_models_path, method: :post %>
-</p>
+  <div id="models" class="overflow-x-auto">
+    <table class="min-w-full border-collapse border border-gray-200">
+      <thead>
+        <tr class="bg-gray-50">
+          <th class="border border-gray-200 px-4 py-2 text-left text-[var(--color-deep-space-blue)] font-semibold">Provider</th>
+          <th class="border border-gray-200 px-4 py-2 text-left text-[var(--color-deep-space-blue)] font-semibold">Model</th>
+          <th class="border border-gray-200 px-4 py-2 text-left text-[var(--color-deep-space-blue)] font-semibold">Context Window</th>
+          <th class="border border-gray-200 px-4 py-2 text-left text-[var(--color-deep-space-blue)] font-semibold">$/1M tokens (In/Out)</th>
+          <th colspan="2" class="border border-gray-200 px-4 py-2 text-left text-[var(--color-deep-space-blue)] font-semibold"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render @models %>
+      </tbody>
+    </table>
+  </div>
 
-<div id="models">
-  <table>
-    <thead>
-      <tr>
-        <th>Provider</th>
-        <th>Model</th>
-        <th>Context Window</th>
-        <th>$/1M tokens (In/Out)</th>
-        <th colspan="2"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <%= render @models %>
-    </tbody>
-  </table>
+  <div class="mt-6">
+    <%= link_to "Back to chats", chats_path, class: "text-[var(--color-yale-blue)] hover:opacity-80 underline" %>
+  </div>
 </div>
-
-<%= link_to "Back to chats", chats_path %>

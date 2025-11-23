@@ -4,13 +4,13 @@
 
 <% content_for :title, "Video Transcription" %>
 
-<div class="max-w-4xl mx-auto p-6">
-  <h1 class="text-2xl font-bold text-red-500 mb-4">Video Transcription #<%= @video_transcription.id %></h1>
+<div class="max-w-4xl mx-auto p-6 bg-white">
+  <h1 class="text-2xl font-bold text-[var(--color-deep-space-blue)] mb-4">Video Transcription #<%= @video_transcription.id %></h1>
 
   <%= render "content", video_transcription: @video_transcription %>
 
   <div class="mt-6 bg-white shadow rounded-lg p-6">
-    <h2 class="text-lg font-semibold mb-4 text-gray-900">Comentarios</h2>
+    <h2 class="text-lg font-semibold mb-4 text-[var(--color-deep-space-blue)]">Comentarios</h2>
     <div class="border-t border-gray-200 pt-4">
       <%= render 'comments/comments', video_transcription: @video_transcription %>
     </div>
@@ -20,9 +20,9 @@
   </div>
 
   <div class="mt-6 flex gap-4">
-    <%= link_to "Volver", video_transcriptions_path, class: "text-blue-600 hover:text-blue-800 underline" %>
+    <%= link_to "Volver", video_transcriptions_path, class: "text-[var(--color-yale-blue)] hover:opacity-80 underline" %>
     <%= button_to "Eliminar", @video_transcription, method: :delete,
-        class: "px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2",
+        class: "px-4 py-2 bg-[var(--color-strawberry-red)] text-white rounded-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-[var(--color-strawberry-red)] focus:ring-offset-2",
         data: { turbo_confirm: "¿Estás seguro de que deseas eliminar este video transcription?" } %>
   </div>
 </div>

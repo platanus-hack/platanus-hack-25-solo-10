@@ -1,16 +1,16 @@
-<div id="<%= dom_id chat %>">
-  <div>
-    <strong>Model:</strong>
-    <%= chat.model&.name || 'Default' %>
+<div id="<%= dom_id chat %>" class="border border-gray-200 rounded-lg p-4 mb-4 bg-white shadow-sm">
+  <div class="mb-2">
+    <strong class="text-[var(--color-deep-space-blue)]">Model:</strong>
+    <span class="text-[var(--color-deep-space-blue)]"><%= chat.model&.name || 'Default' %></span>
+  </div>
+
+  <div class="mb-2">
+    <strong class="text-[var(--color-deep-space-blue)]">Messages:</strong>
+    <span class="text-[var(--color-deep-space-blue)]"><%= chat.messages.count %></span>
   </div>
 
   <div>
-    <strong>Messages:</strong>
-    <%= chat.messages.count %>
-  </div>
-
-  <div>
-    <strong>Created:</strong>
-    <%= chat.created_at.strftime("%B %d, %Y at %I:%M %p") %>
+    <strong class="text-[var(--color-deep-space-blue)]">Created:</strong>
+    <span class="text-[var(--color-deep-space-blue)]"><%= chat.created_at.strftime("%B %d, %Y at %I:%M %p") %></span>
   </div>
 </div>

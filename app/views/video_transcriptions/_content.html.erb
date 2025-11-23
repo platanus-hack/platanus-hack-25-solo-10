@@ -1,26 +1,26 @@
 <div id="<%= dom_id(video_transcription) %>">
   <div class="bg-white shadow rounded-lg p-6 mb-6">
-    <h2 class="text-lg font-semibold mb-4">Información</h2>
+    <h2 class="text-lg font-semibold mb-4 text-[var(--color-deep-space-blue)]">Información</h2>
   
   <div class="mb-4">
-    <label class="block text-sm font-medium text-gray-700 mb-1">URL</label>
-    <p class="text-gray-900 break-all">
-      <%= link_to video_transcription.url, video_transcription.url, target: "_blank", rel: "noopener noreferrer", class: "text-blue-600 hover:text-blue-800 underline" %>
+    <label class="block text-sm font-medium text-[var(--color-deep-space-blue)] mb-1">URL</label>
+    <p class="text-[var(--color-deep-space-blue)] break-all">
+      <%= link_to video_transcription.url, video_transcription.url, target: "_blank", rel: "noopener noreferrer", class: "text-[var(--color-yale-blue)] hover:opacity-80 underline" %>
     </p>
   </div>
 
   <div class="mb-4">
-    <label class="block text-sm font-medium text-gray-700 mb-1">Pregunta inicial</label>
-    <p class="text-gray-900 break-all">
+    <label class="block text-sm font-medium text-[var(--color-deep-space-blue)] mb-1">Pregunta inicial</label>
+    <p class="text-[var(--color-deep-space-blue)] break-all">
       <%= video_transcription.initial_question %>
     </p>
   </div>
 
   <% if video_transcription.transcription.present? %>
     <div class="mb-4">
-      <label class="block text-sm font-medium text-gray-700 mb-1">Transcripción</label>
-      <div class="bg-gray-50 p-4 rounded border border-gray-200">
-        <p class="text-gray-900 whitespace-pre-wrap"><%= video_transcription.transcription %></p>
+      <label class="block text-sm font-medium text-[var(--color-deep-space-blue)] mb-1">Transcripción</label>
+      <div class="bg-white p-4 rounded border border-gray-200">
+        <p class="text-[var(--color-deep-space-blue)] whitespace-pre-wrap"><%= video_transcription.transcription %></p>
       </div>
     </div>
   <% end %>
@@ -47,11 +47,11 @@
       <% elsif video_transcription.media.content_type.start_with?("image/") %>
         <%= image_tag video_transcription.media, class: "max-w-full rounded-lg shadow" %>
       <% else %>
-        <div class="p-4 bg-gray-100 rounded">
-          <p class="text-gray-700">
-            <%= link_to "Descargar archivo", url_for(video_transcription.media), download: true, class: "text-blue-600 hover:text-blue-800 underline" %>
+        <div class="p-4 bg-white rounded">
+          <p class="text-[var(--color-deep-space-blue)]">
+            <%= link_to "Descargar archivo", url_for(video_transcription.media), download: true, class: "text-[var(--color-yale-blue)] hover:opacity-80 underline" %>
           </p>
-          <p class="text-sm text-gray-500 mt-2">Tipo: <%= video_transcription.media.content_type %></p>
+          <p class="text-sm text-[var(--color-deep-space-blue)] opacity-70 mt-2">Tipo: <%= video_transcription.media.content_type %></p>
         </div>
       <% end %>
     </div>
@@ -60,7 +60,7 @@
 
   <% if video_transcription.captures.attached? %>
   <div class="bg-white shadow rounded-lg p-6 mb-6">
-    <h2 class="text-lg font-semibold mb-4">Capturas (<%= video_transcription.captures.count %>)</h2>
+    <h2 class="text-lg font-semibold mb-4 text-[var(--color-deep-space-blue)]">Capturas (<%= video_transcription.captures.count %>)</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       <% video_transcription.captures.each do |capture| %>
         <div class="border border-gray-200 rounded-lg overflow-hidden shadow-sm">
