@@ -1,5 +1,7 @@
 # README
 
+## Solo-10 Platanus Hack 2025
+
 ## Cómo iniciar la aplicación Rails
 
 1. Instala las dependencias:
