@@ -1,24 +1,31 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Cómo iniciar la aplicación Rails
 
-Things you may want to cover:
+1. Instala las dependencias:
+   ```bash
+   bundle install
+   npm install
+   ```
 
-* Ruby version
+2. Configura la base de datos:
+   ```bash
+   rails db:setup
+   ```
 
-* System dependencies
+3. Inicia el servidor:
+   ```bash
+   bin/rails server
+   ```
+4. Inicia los jobs
+```bash
+   bin/jobs
+   ```
 
-* Configuration
+5. Inivia Vite
+```bash
+   bin/vite dev
+   ```
 
-* Database creation
+Accede a la aplicación en [http://localhost:3000](http://localhost:3000)
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
