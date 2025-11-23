@@ -27,7 +27,7 @@ class Camila
   end
 
   def ask(message)
-    chat = RubyLLM::Chat.new(model: "perplexity/sonar")
+    chat = RubyLLM::Chat.new(model: "perplexity/sonar-pro")
     chat = chat.with_params(num_citations: 2)
     chat = chat.with_instructions(system_prompt)
 
