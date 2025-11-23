@@ -33,14 +33,6 @@ class Comment < ApplicationRecord
   }
 
   after_create_commit :broadcast_append
-  after_create_commit :trigger_agent_responses
-  after_create_commit :update_video_player_if_agent
-
-  def trigger_agent_responses
-    if agent == 'user'
-      InitDiscussionJob.perform_later(video_transcription_id)
-    end
-  end
 
   def agent_color
     case agent
@@ -88,18 +80,6 @@ class Comment < ApplicationRecord
       target: "comments_#{video_transcription.id}",
       partial: 'comments/comment',
       locals: { comment: self }
-    )
-  end
-
-  def update_video_player_if_agent
-    return if agent == 'user'
-
-    video_transcription.reload
-    Turbo::StreamsChannel.broadcast_replace_to(
-      video_transcription,
-      target: dom_id(video_transcription, :player),
-      partial: 'video_transcriptions/video_player',
-      locals: { video_transcription: video_transcription }
     )
   end
 end

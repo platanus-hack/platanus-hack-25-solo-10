@@ -5,6 +5,7 @@
 #  created_at       :datetime         not null
 #  id               :integer          not null, primary key
 #  initial_question :string
+#  score            :integer
 #  transcription    :string
 #  updated_at       :datetime         not null
 #  url              :string           not null
@@ -25,7 +26,6 @@ class VideoTranscription < ApplicationRecord
   private
 
   def broadcast_update
-    Turbo::StreamsChannel.broadcast_replace_to(self, target: dom_id(self), partial: "video_transcriptions/content", locals: { video_transcription: self })
     Turbo::StreamsChannel.broadcast_replace_to(self, target: dom_id(self, :player), partial: "video_transcriptions/video_player", locals: { video_transcription: self })
   end
 end

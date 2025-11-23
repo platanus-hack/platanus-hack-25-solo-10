@@ -20,7 +20,7 @@
     </div>
 
     <!-- Video Player Section -->
-    <div class="mb-3 sm:mb-4">
+    <div class="mb-8">
       <div id="<%= dom_id(@video_transcription, :player) %>">
         <%= render 'video_transcriptions/video_player', video_transcription: @video_transcription %>
       </div>
@@ -35,15 +35,9 @@
       </div>
     </div>
 
-    <!-- Action Buttons -->
-    <div class="flex gap-3 sm:gap-4 px-3 sm:px-4 pb-3 sm:pb-4">
-      <%= link_to root_path, class: "flex-1 px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 text-center font-medium" do %>
-        Volver
-      <% end %>
-      <button data-controller="share" data-action="click->share#share" class="flex-1 px-4 py-2 bg-[var(--color-yale-blue)] text-white rounded-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-[var(--color-yale-blue)] focus:ring-offset-2 font-medium">
-        Compartir
-      </button>
-    </div>
+    <div id=<%= dom_id(@video_transcription, :score) %>>
+      <%= render 'video_transcriptions/score', video_transcription: @video_transcription %>
+    </div>    
   </div>
 </div>
 

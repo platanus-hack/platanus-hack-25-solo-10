@@ -1,0 +1,30 @@
+<% if @video_transcription.score.present? %>
+  <% if @video_transcription.score > 70 %>
+    <div class="bg-mint-leaf rounded-lg p-4 mb-8 text-lg text-white">
+      <p>
+        Contenido verificado 👍
+      </p>
+    </div>
+  <% elsif @video_transcription.score > 50 %>
+    <div class="bg-yellow-500 rounded-lg p-4 mb-8 text-lg text-white">
+      <p>
+        Contenido parcialmente verificado 👀
+      </p>
+    </div>
+  <% else %>
+    <div class="bg-strawberry-red rounded-lg p-4 mb-8 text-lg text-white">
+      <p>
+        Contenido no verificado 👎
+      </p>
+    </div>
+  <% end %>
+
+  <div class="flex gap-3 sm:gap-4 px-3 sm:px-4 pb-3 sm:pb-4">
+    <%= link_to root_path, class: "flex-1 px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 text-center font-medium" do %>
+      Volver
+    <% end %>
+    <button data-controller="share" data-action="click->share#share" class="flex-1 px-4 py-2 bg-[var(--color-yale-blue)] text-white rounded-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-[var(--color-yale-blue)] focus:ring-offset-2 font-medium">
+      Compartir
+    </button>
+  </div>
+<% end %>

@@ -13,7 +13,13 @@ class VideoTranscriptionsController < ApplicationController
     @video_transcription = VideoTranscription.new(video_transcription_params)
 
     if @video_transcription.save
+      @video_transcription.comments.create!(
+        agent: "user",
+        content: @video_transcription.initial_question
+      )
+
       DownloadVideoJob.perform_later(@video_transcription.id)
+
       redirect_to @video_transcription, notice: 'La transcripción de video está siendo descargada.'
     else
       render :new, status: :unprocessable_entity

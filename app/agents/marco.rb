@@ -24,7 +24,7 @@ class Marco
 
   def ask(message)
     chat = RubyLLM::Chat.new(model: "perplexity/sonar")
-    chat = chat.with_params(num_citations: 3)
+    chat = chat.with_params(num_citations: 2)
     chat = chat.with_instructions(system_prompt)
 
     chat.ask(message)

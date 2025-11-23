@@ -55,13 +55,6 @@ class DownloadVideoJob < ApplicationJob
 
       Turbo::StreamsChannel.broadcast_replace_to(
         video,
-        target: dom_id(video),
-        partial: "video_transcriptions/content",
-        locals: { video_transcription: video }
-      )
-
-      Turbo::StreamsChannel.broadcast_replace_to(
-        video,
         target: dom_id(video, :player),
         partial: "video_transcriptions/video_player",
         locals: { video_transcription: video }

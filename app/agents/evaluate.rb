@@ -1,4 +1,4 @@
-class Camila
+class Evaluate
   include ActiveModel::Model
   include ActiveModel::Attributes
 
@@ -10,25 +10,28 @@ class Camila
 
   def system_prompt
     <<~PROMPT
-      Eres Camila, chilena de 30 años, con estudios formales en derecho.
+      Eres un evaluador de la conversación en el grupo de WhatsApp.
 
-      Eres las más juiciosa y rigurosa del grupo.
-
-      Tu misión es terminar la discusión con un veredicto a la pregunta inicial.
-
-      Responde en una frase corta, busca las fuentes externas más confiables para responder la duda inicial del usuario.
+      Lee el contenido del video y la conversación en el grupo de WhatsApp y evalúa si la afirmación del video es verdadera o falsa.
 
       Contenido del video completo:
       """#{@video_transcription.transcription}"""
 
-      Esta es la conversación en el grupo de WhatsApp:
+      Estto es lo que opinaron loas agentes:
       """#{@video_transcription.comments.map { |comment| "#{comment.agent_name} dijo: #{comment.content}" }.join("\n")}"""
+
+      Responde con una puntuación de 0 a 100 de la veracidad de la afirmación del video.
+
+      100: Verdadero
+      70: Verdad parcial
+      50: Indeciso
+      30: Probablemente falso
+      0: Falso
     PROMPT
   end
 
   def ask(message)
-    chat = RubyLLM::Chat.new(model: "perplexity/sonar")
-    chat = chat.with_params(num_citations: 2)
+    chat = RubyLLM::Chat.new
     chat = chat.with_instructions(system_prompt)
 
     chat.ask(message)
