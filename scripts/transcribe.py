@@ -17,7 +17,7 @@ if not os.path.exists(video_path):
     sys.exit(1)
 
 print(f"Transcribing video: {video_path}")
-model = whisper.load_model("medium")
+model = whisper.load_model("large-v3-turbo")
 result = model.transcribe(video_path, language="es")
 
 output_file = f"{filename}"

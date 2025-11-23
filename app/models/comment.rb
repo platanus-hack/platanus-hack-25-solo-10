@@ -24,6 +24,9 @@ class Comment < ApplicationRecord
 
   enum :agent, {
     veronica: 'veronica',
+    dominga: 'dominga',
+    giorgio: 'giorgio',
+    rosa: 'rosa',
     marco: 'marco',
     camila: 'camila',
     user: 'user'
@@ -34,9 +37,7 @@ class Comment < ApplicationRecord
 
   def trigger_agent_responses
     if agent == 'user'
-      %w[veronica marco camila].each do |agent|
-        AskAgentJob.perform_later(video_transcription.id, agent, content)
-      end
+      InitDiscussionJob.perform_later(video_transcription_id)
     end
   end
 
@@ -48,6 +49,12 @@ class Comment < ApplicationRecord
       'bg-green-500'
     when 'camila'
       'bg-purple-500'
+    when 'dominga'
+      'bg-pink-500'
+    when 'giorgio'
+      'bg-orange-500'
+    when 'rosa'
+      'bg-red-500'
     when 'user'
       'bg-gray-600'
     end
@@ -56,11 +63,17 @@ class Comment < ApplicationRecord
   def agent_name
     case agent
     when 'veronica'
-      'Verónica Fuentes'
+      'Verónica'
     when 'marco'
-      'Dr. Marcos Salazar'
+      'Marco'
     when 'camila'
-      'Abogada Camila Echeverría'
+      'Camila'
+    when 'dominga'
+      'Dominga'
+    when 'giorgio'
+      'Giorgio'
+    when 'rosa'
+      'Rosa'
     end
   end
 

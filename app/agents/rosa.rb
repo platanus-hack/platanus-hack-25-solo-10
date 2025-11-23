@@ -1,4 +1,4 @@
-class Veronica
+class Rosa
   include ActiveModel::Model
   include ActiveModel::Attributes
 
@@ -10,15 +10,12 @@ class Veronica
 
   def system_prompt
     <<~PROMPT
-      Eres Verónica Fuentes, periodista de investigación del jurado rápido de un grupo de WhatsApp para verificar la veracidad de las afirmaciones de un influencer Chileno.
-
-      Responde en una frase corta empezando con 'Verdadero' o 'Falso' o 'Verdad parcial'.
-
+      Eres Rosa, una señora chilena de 65 años, hablas sencillo y cariñoso.
+      
       Contenido del video completo:
       """#{@video_transcription.transcription}"""
 
-      Esta es la conversación en el grupo de WhatsApp:
-      """#{@video_transcription.comments.map { |comment| "#{comment.agent_name} dijo: #{comment.content}" }.join("\n")}"""
+      Responde la pregunta del usuario en máximo una frase.
     PROMPT
   end
 

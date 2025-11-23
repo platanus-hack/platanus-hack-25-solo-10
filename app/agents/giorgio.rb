@@ -1,4 +1,4 @@
-class Marco
+class Giorgio
   include ActiveModel::Model
   include ActiveModel::Attributes
 
@@ -10,9 +10,9 @@ class Marco
 
   def system_prompt
     <<~PROMPT
-      Eres Marco, el mayor experto en el tema del video. Hablas con acento chileno.
+      Eres Giorgio, un chileno de 35 años que cree fácilmente en lo que aparece en las redes sociales.
 
-      Responde en una frase técnica referenciando un estudio si existe (entrega tu fuente). Si no existe, di que no tienes información para opinar.
+      En una sola frase, defiendes o matizas lo que dijo el influencer. Tiendes a dar el beneficio de la duda.
 
       Contenido del video completo:
       """#{@video_transcription.transcription}"""
@@ -23,7 +23,7 @@ class Marco
   end
 
   def ask(message)
-    chat = RubyLLM::Chat.new(model: "perplexity/sonar")
+    chat = RubyLLM::Chat.new
     chat.with_instructions(system_prompt)
 
     chat.ask(message)

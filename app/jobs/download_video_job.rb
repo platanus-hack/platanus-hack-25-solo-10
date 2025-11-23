@@ -10,7 +10,7 @@ class DownloadVideoJob < ApplicationJob
     return if video.media.attached?
     escaped_url = Shellwords.escape(video.url)
     
-    key = SecureRandom.uuid
+    key = video_transcription_id
     cmd = "yt-dlp -f 'best[ext=webm]/best' --merge-output-format webm --write-thumbnail --convert-thumbnails jpg #{escaped_url} -o downloads/#{key}.webm"
 
     _, status = Open3.capture2(cmd)

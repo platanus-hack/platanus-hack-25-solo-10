@@ -9,6 +9,13 @@
     </p>
   </div>
 
+  <div class="mb-4">
+    <label class="block text-sm font-medium text-gray-700 mb-1">Pregunta inicial</label>
+    <p class="text-gray-900 break-all">
+      <%= video_transcription.initial_question %>
+    </p>
+  </div>
+
   <% if video_transcription.transcription.present? %>
     <div class="mb-4">
       <label class="block text-sm font-medium text-gray-700 mb-1">Transcripción</label>

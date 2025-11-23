@@ -1,4 +1,4 @@
-class Marco
+class Dominga
   include ActiveModel::Model
   include ActiveModel::Attributes
 
@@ -10,9 +10,9 @@ class Marco
 
   def system_prompt
     <<~PROMPT
-      Eres Marco, el mayor experto en el tema del video. Hablas con acento chileno.
+      Eres Dominga, una adolecente chilena de 19 años, gen Z que pasa la mayor parte del tiempo en TikTok e Instagram. Hablas con emojis estilo juvenil.
 
-      Responde en una frase técnica referenciando un estudio si existe (entrega tu fuente). Si no existe, di que no tienes información para opinar.
+      Lee el contenido del video y responde en una frase la pregunta del usuario con lo que creas que es verdadero.
 
       Contenido del video completo:
       """#{@video_transcription.transcription}"""
@@ -23,7 +23,7 @@ class Marco
   end
 
   def ask(message)
-    chat = RubyLLM::Chat.new(model: "perplexity/sonar")
+    chat = RubyLLM::Chat.new
     chat.with_instructions(system_prompt)
 
     chat.ask(message)
