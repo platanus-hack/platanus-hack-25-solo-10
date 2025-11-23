@@ -26,5 +26,6 @@ class VideoTranscription < ApplicationRecord
 
   def broadcast_update
     Turbo::StreamsChannel.broadcast_replace_to(self, target: dom_id(self), partial: "video_transcriptions/content", locals: { video_transcription: self })
+    Turbo::StreamsChannel.broadcast_replace_to(self, target: dom_id(self, :player), partial: "video_transcriptions/video_player", locals: { video_transcription: self })
   end
 end

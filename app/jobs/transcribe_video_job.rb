@@ -26,6 +26,13 @@ class TranscribeVideoJob < ApplicationJob
           locals: { video_transcription: video_transcription }
         )
 
+        Turbo::StreamsChannel.broadcast_replace_to(
+          video_transcription,
+          target: dom_id(video_transcription, :player),
+          partial: "video_transcriptions/video_player",
+          locals: { video_transcription: video_transcription }
+        )
+
         question = video_transcription.initial_question
 
         video_transcription.comments.create!(

@@ -1,29 +1,24 @@
-<p style="color: green"><%= notice %></p>
-
 <%= turbo_stream_from @video_transcription %>
 
-<% content_for :title, "Video Transcription" %>
+<% content_for :title, "Ver Video" %>
 
-<div class="max-w-4xl mx-auto p-6 bg-white">
-  <h1 class="text-2xl font-bold text-[var(--color-deep-space-blue)] mb-4">Video Transcription #<%= @video_transcription.id %></h1>
-
-  <%= render "content", video_transcription: @video_transcription %>
-
-  <div class="mt-6 bg-white shadow rounded-lg p-6">
-    <h2 class="text-lg font-semibold mb-4 text-[var(--color-deep-space-blue)]">Comentarios</h2>
-    <div class="border-t border-gray-200 pt-4">
-      <%= render 'comments/comments', video_transcription: @video_transcription %>
+<div class="min-h-screen bg-gray-50 pb-6">
+  <div class="max-w-2xl mx-auto px-3 sm:px-4 pt-3 sm:pt-4">
+    <!-- Video Player Section -->
+    <div class="mb-3 sm:mb-4">
+      <div id="<%= dom_id(@video_transcription, :player) %>">
+        <%= render 'video_transcriptions/video_player', video_transcription: @video_transcription %>
+      </div>
     </div>
-    <div class="mt-4 pt-4 border-t border-gray-200">
-      <%= render 'comments/form', video_transcription: @video_transcription, comment: @video_transcription.comments.build(agent: 'user') %>
-    </div>
-  </div>
 
-  <div class="mt-6 flex gap-4">
-    <%= link_to "Volver", video_transcriptions_path, class: "text-[var(--color-yale-blue)] hover:opacity-80 underline" %>
-    <%= button_to "Eliminar", @video_transcription, method: :delete,
-        class: "px-4 py-2 bg-[var(--color-strawberry-red)] text-white rounded-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-[var(--color-strawberry-red)] focus:ring-offset-2",
-        data: { turbo_confirm: "¿Estás seguro de que deseas eliminar este video transcription?" } %>
+    <!-- Comments Section -->
+    <div class="p-3 sm:p-4">
+      <div id="comments_<%= @video_transcription.id %>" class="space-y-3 sm:space-y-4 min-h-[200px]">
+        <% @video_transcription.comments.order(created_at: :asc).each do |comment| %>
+          <%= render 'comments/comment', comment: comment %>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
 

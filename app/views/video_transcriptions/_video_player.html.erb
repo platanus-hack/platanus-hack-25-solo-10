@@ -1,0 +1,37 @@
+<% if video_transcription.media.attached? %>
+  <!-- Video is ready -->
+  <div class="overflow-hidden rounded-lg">
+    <div class="aspect-[9/16] bg-black flex items-center justify-center max-w-sm mx-auto rounded-lg">
+      <% if video_transcription.media.content_type.start_with?("video/") %>
+        <%= video_tag url_for(video_transcription.media), 
+            controls: true, 
+            class: "w-full h-full object-contain",
+            playsinline: true %>
+      <% elsif video_transcription.media.content_type.start_with?("image/") %>
+        <%= image_tag video_transcription.media, class: "w-full h-full object-contain" %>
+      <% end %>
+    </div>
+    
+    <!-- Processing message if transcription is not ready yet -->
+    <% unless video_transcription.comments.where.not(agent: 'user').any? %>
+      <div class="px-3 sm:px-4 py-2.5 sm:py-3 bg-blue-50 border-t border-blue-100">
+        <div class="flex items-center gap-2 sm:gap-3">
+          <div class="animate-spin rounded-full h-4 w-4 sm:h-5 sm:w-5 border-b-2 border-blue-600 flex-shrink-0"></div>
+          <p class="text-xs sm:text-sm text-blue-800 font-medium">Los agentes están viendo el video...</p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <!-- Video is downloading -->
+  <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 sm:p-8">
+    <div class="flex flex-col items-center justify-center text-center">
+      <div class="animate-spin rounded-full h-10 w-10 sm:h-12 sm:w-12 border-b-2 border-blue-600 mb-3 sm:mb-4"></div>
+      <h3 class="text-base sm:text-lg font-semibold text-gray-800 mb-2">Descargando video...</h3>
+      <p class="text-xs sm:text-sm text-gray-600 max-w-sm px-2">
+        Por favor espera mientras se descarga el video. Esta página se actualizará automáticamente cuando esté listo.
+      </p>
+    </div>
+  </div>
+<% end %>
+
